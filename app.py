@@ -1,8 +1,16 @@
 # app.py
 
 from flask import Flask
+import redis
 
 app = Flask(__name__)
+r = redis.Redis(host='localhost', port=6379, decode_responses=True)
+
+@app.route('/count')
+def homepage():
+    # Increment the counter in Redis
+    sitevisits = r.incr('visit_count')
+    return f'This page has been visited {sitevisits} times!'
 
 @app.route('/')
 def hello_world():
