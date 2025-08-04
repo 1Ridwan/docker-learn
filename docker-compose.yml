@@ -9,6 +9,7 @@ services:
       - redis
     environment:
       - REDIS_HOST=redis
+      - REDIS_PORT=6379
 
   redis:
     image: redis:latest

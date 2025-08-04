@@ -2,9 +2,13 @@
 
 from flask import Flask
 import redis
+import os
+
+redis_host=os.getenv('REDIS_HOST', 'redis')
+redis_port=int(os.getenv('REDIS_PORT', 6379))
 
 app = Flask(__name__)
-r = redis.Redis(host='redis', port=6379, decode_responses=True)
+r = redis.Redis(host=redis_host, port=redis_port, decode_responses=True)
 
 @app.route('/count')
 def homepage():
